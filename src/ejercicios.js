@@ -227,22 +227,19 @@ function obtenerDimensionesImagen(rutaImagen) {
  * const oscuro = ajustarBrillo(matriz, 0.5);    // 50% más oscuro
  */
 function ajustarBrillo(matriz, factor) {
-  // TODO: Implementar ajuste de brillo
-  
-  // 1. Crear matriz resultado
-  // const resultado = copiarMatriz(matriz);
-  
-  // 2. Para cada pixel, multiplicar R, G, B por el factor
-  // for (let i = 0; i < resultado.length; i++) {
-  //   for (let j = 0; j < resultado[i].length; j++) {
-  //     resultado[i][j].r = limitarValorColor(matriz[i][j].r * factor);
-  //     resultado[i][j].g = limitarValorColor(matriz[i][j].g * factor);
-  //     resultado[i][j].b = limitarValorColor(matriz[i][j].b * factor);
-  //     // El canal alpha NO se modifica
-  //   }
-  // }
-  
-  return []; // REEMPLAZAR
+  const resultado = copiarMatriz(matriz);
+
+  for (let i = 0; i < resultado.length; i++) {
+    for (let j = 0; j < resultado[i].length; j++) {
+      const pixel = resultado[i][j];
+
+      pixel.r = limitarValorColor(pixel.r * factor);
+      pixel.g = limitarValorColor(pixel.g * factor);
+      pixel.b = limitarValorColor(pixel.b * factor);
+    }
+  }
+
+  return resultado;
 }
 
 /**
@@ -264,9 +261,19 @@ function ajustarBrillo(matriz, factor) {
  * // Rojo (255,0,0) → Cian (0,255,255)
  */
 function invertirColores(matriz) {
-  // TODO: Implementar inversión de colores
-  
-  return []; // REEMPLAZAR
+  const resultado = copiarMatriz(matriz);
+
+  for (let i = 0; i < resultado.length; i++) {
+    for (let j = 0; j < resultado[i].length; j++) {
+      const pixel = resultado[i][j];
+
+      pixel.r = 255 - pixel.r;
+      pixel.g = 255 - pixel.g;
+      pixel.b = 255 - pixel.b;
+    }
+  }
+
+  return resultado;
 }
 
 /**
@@ -284,16 +291,25 @@ function invertirColores(matriz) {
  * const grises = convertirEscalaGrises(matriz);
  */
 function convertirEscalaGrises(matriz) {
-  // TODO: Implementar conversión a escala de grises
-  
-  // Para cada pixel:
-  // 1. Calcular el valor de gris
-  // const gris = 0.299 * pixel.r + 0.587 * pixel.g + 0.114 * pixel.b;
-  // 
-  // 2. Asignar ese valor a los tres canales
-  // pixelNuevo = {r: gris, g: gris, b: gris, a: pixel.a}
-  
-  return []; // REEMPLAZAR
+  const resultado = copiarMatriz(matriz);
+
+  for (let i = 0; i < resultado.length; i++) {
+    for (let j = 0; j < resultado[i].length; j++) {
+      const p = resultado[i][j];
+
+      const gris = Math.round(
+        0.299 * p.r +
+        0.587 * p.g +
+        0.114 * p.b
+      );
+
+      p.r = gris;
+      p.g = gris;
+      p.b = gris;
+    }
+  }
+
+  return resultado;
 }
 
 // ============================================
