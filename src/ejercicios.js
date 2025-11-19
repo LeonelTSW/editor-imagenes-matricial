@@ -333,12 +333,13 @@ function convertirEscalaGrises(matriz) {
  * const espejo = voltearHorizontal(matriz);
  */
 function voltearHorizontal(matriz) {
-  // TODO: Implementar volteo horizontal
-  
-  // Pista: Puedes usar .reverse() en cada fila
-  // o construir manualmente invirtiendo el orden
-  
-  return []; // REEMPLAZAR
+  const resultado = copiarMatriz(matriz);
+
+  for (let i = 0; i < resultado.length; i++) {
+    resultado[i].reverse();
+  }
+
+  return resultado;
 }
 
 /**
@@ -357,9 +358,11 @@ function voltearHorizontal(matriz) {
  * const invertido = voltearVertical(matriz);
  */
 function voltearVertical(matriz) {
-  // TODO: Implementar volteo vertical
-  
-  return []; // REEMPLAZAR
+  const resultado = copiarMatriz(matriz);
+
+  resultado.reverse();
+
+  return resultado;
 }
 
 /**
@@ -382,13 +385,21 @@ function voltearVertical(matriz) {
  * const rotada = rotar90Grados(matriz);
  */
 function rotar90Grados(matriz) {
-  // TODO: Implementar rotación de 90 grados
-  
-  // Opción 1: Hacer transpuesta manualmente considerando que son objetos
-  // Opción 2: Construir directamente la matriz rotada
-  //   nuevoPixel[j][alto - 1 - i] = pixelOriginal[i][j]
-  
-  return []; // REEMPLAZAR
+  const alto = matriz.length;
+  const ancho = matriz[0].length;
+
+  // La nueva matriz tendrá dimensiones invertidas
+  const nueva = crearMatrizVacia(ancho, alto);
+
+  for (let i = 0; i < alto; i++) {
+    for (let j = 0; j < ancho; j++) {
+      // Regla de rotación 90°:
+      // nuevo[j][alto - 1 - i] = original[i][j]
+      nueva[j][alto - 1 - i] = { ...matriz[i][j] };
+    }
+  }
+
+  return nueva;
 }
 
 // ============================================
